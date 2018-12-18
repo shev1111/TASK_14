@@ -5,6 +5,7 @@ public class Client {
     private String name;
     private String login;
     private String password;
+    private Cart cart = new Cart(this);
 
     public Client() {
     }
@@ -52,5 +53,13 @@ public class Client {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

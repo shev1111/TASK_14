@@ -1,11 +1,19 @@
 package com.shev.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class Order {
     private int positionId;
     private int itemId;
     private int itemCount;
     private int cartId;
     private long time;
+    private Cart cart;
+    private Set items = new HashSet();
+    private int orderTotalPrice;
 
     public Order() {
     }
@@ -63,4 +71,28 @@ public class Order {
     public void setTime(long time) {
         this.time = time;
     }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public Set getItems() {
+        return items;
+    }
+
+    public void addItem(Item item){
+        items.add(item);
+        this.orderTotalPrice +=(item.getPrice()*item.getItemsOrderCount());
+    }
+
+    public void deleteItem(Item item) {
+        items.remove(item);
+    }
+
+
+
 }

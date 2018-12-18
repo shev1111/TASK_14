@@ -4,7 +4,8 @@ public class Item {
     private int itemId;
     private String title;
     private int price;
-    private int count;
+    private int availability;
+    private int itemsOrderCount;
 
     public Item() {
     }
@@ -14,7 +15,7 @@ public class Item {
         this.itemId = itemId;
         this.title = title;
         this.price = price;
-        this.count = count;
+        this.availability = count;
     }
 
     public int getItemId() {
@@ -41,11 +42,20 @@ public class Item {
         this.price = price;
     }
 
-    public int getCount() {
-        return count;
+    public int getAvailability() {
+        return availability;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setAvailability(int availability) {
+        this.availability = availability;
+    }
+
+    public int getItemsOrderCount() {
+        return itemsOrderCount;
+    }
+
+    public void setItemsOrderCount(int itemsOrderCount) {
+        this.itemsOrderCount = itemsOrderCount;
     }
 }
+
