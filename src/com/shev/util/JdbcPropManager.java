@@ -13,7 +13,7 @@ public class JdbcPropManager {
 
     public static String getProperty(String property) {
         try {
-            InputStream inputStream = new FileInputStream("com/sources/jdbc.properties");
+            InputStream inputStream = new FileInputStream("src/com/sources/jdbc.properties");
             Properties properties = new Properties();
             properties.load(inputStream);
             String receiveProp = properties.getProperty(property);

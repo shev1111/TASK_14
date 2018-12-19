@@ -11,8 +11,7 @@ public class Item {
     }
 
 
-    public Item(int itemId, String title, int price, int count) {
-        this.itemId = itemId;
+    public Item( String title, int price, int count) {
         this.title = title;
         this.price = price;
         this.availability = count;
