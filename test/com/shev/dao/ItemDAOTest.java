@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ItemDAOTest {
-    private static Item testItem = new Item("test", 101010, 111);
+    private static Item testItem = new Item(0,"test", 101010, 111);
     private static int testId = 0;
     private static int testUpPrice = 10101;
 

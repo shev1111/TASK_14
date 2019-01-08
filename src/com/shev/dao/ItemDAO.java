@@ -12,12 +12,13 @@ public class ItemDAO {
     private static Logger logger = Logger.getLogger(ItemDAO.class.getName());
 
     public static Item insertItem(Item item){
-        String sql = "INSERT INTO items (title, price, availability) VALUES(?,?,?)";
+        String sql = "INSERT INTO items (item_id, title, price, availability) VALUES(?,?,?,?)";
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
-            preparedStatement.setString(1,item.getTitle());
-            preparedStatement.setInt(2,item.getPrice());
-            preparedStatement.setInt(3,item.getAvailability());
+            preparedStatement.setInt(1,item.getItemId());
+            preparedStatement.setString(2,item.getTitle());
+            preparedStatement.setInt(3,item.getPrice());
+            preparedStatement.setInt(4,item.getAvailability());
             preparedStatement.execute();
             logger.info("Item  "+item.getTitle()+" was inserted");
             return item;
@@ -50,7 +51,6 @@ public class ItemDAO {
         logger.info("Item "+item.getTitle()+" was not received");
         return new Item();
     }
-
 
     public static Item retrieveItemByTitle(String title){
         String sql = "SELECT item_id, title, price, availability FROM items WHERE title =?";

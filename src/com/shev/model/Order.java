@@ -1,43 +1,39 @@
 package com.shev.model;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Order {
-    private int positionId;
+    private int order_id;
     private int itemId;
     private int itemCount;
-    private int cartId;
     private long time;
-    private Cart cart;
+    private String client_login;
     private Set items = new HashSet();
-    private int orderTotalPrice;
+    private int orderTotalPrice=0;
 
     public Order() {
     }
 
-    public Order(int positionId, int itemId, int itemCount, int cartId, long time) {
-        this.positionId = positionId;
+    public Order(int order_id, int itemId, int itemCount, long time) {
+        this.order_id = order_id;
         this.itemId = itemId;
         this.itemCount = itemCount;
-        this.cartId = cartId;
         this.time = time;
     }
 
-    public Order(int itemId, int itemCount, int cartId) {
+    public Order(int order_id, int itemId, int itemCount) {
+        this.order_id = order_id;
         this.itemId = itemId;
         this.itemCount = itemCount;
-        this.cartId = cartId;
     }
 
-    public int getPositionId() {
-        return positionId;
+    public int getOrder_id() {
+        return order_id;
     }
 
-    public void setPositionId(int positionId) {
-        this.positionId = positionId;
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
     }
 
     public int getItemId() {
@@ -56,28 +52,12 @@ public class Order {
         this.itemCount = itemCount;
     }
 
-    public int getCartId() {
-        return cartId;
-    }
-
-    public void setCartId(int cartId) {
-        this.cartId = cartId;
-    }
-
     public long getTime() {
         return time;
     }
 
     public void setTime(long time) {
         this.time = time;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
     }
 
     public Set getItems() {
@@ -93,6 +73,11 @@ public class Order {
         items.remove(item);
     }
 
+    public String getClient_login() {
+        return client_login;
+    }
 
-
+    public void setClient_login(String client_login) {
+        this.client_login = client_login;
+    }
 }

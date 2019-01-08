@@ -10,12 +10,13 @@ public class Item {
     public Item() {
     }
 
-
-    public Item( String title, int price, int count) {
+    public Item(int itemId, String title, int price, int availability) {
+        this.itemId = itemId;
         this.title = title;
         this.price = price;
-        this.availability = count;
+        this.availability = availability;
     }
+
 
     public int getItemId() {
         return itemId;
