@@ -1,16 +1,13 @@
 package com.shev.model;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class Order {
     private int order_id;
     private int itemId;
     private int itemCount;
     private long time;
+    private Item item;
     private String client_login;
-    private Set items = new HashSet();
-    private int orderTotalPrice=0;
 
     public Order() {
     }
@@ -26,6 +23,21 @@ public class Order {
         this.order_id = order_id;
         this.itemId = itemId;
         this.itemCount = itemCount;
+    }
+
+    public Order(int order_id, int itemId, int itemCount, String client_login) {
+        this.order_id = order_id;
+        this.itemId = itemId;
+        this.itemCount = itemCount;
+        this.client_login = client_login;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public int getOrder_id() {
@@ -58,19 +70,6 @@ public class Order {
 
     public void setTime(long time) {
         this.time = time;
-    }
-
-    public Set getItems() {
-        return items;
-    }
-
-    public void addItem(Item item){
-        items.add(item);
-        this.orderTotalPrice +=(item.getPrice()*item.getItemsOrderCount());
-    }
-
-    public void deleteItem(Item item) {
-        items.remove(item);
     }
 
     public String getClient_login() {

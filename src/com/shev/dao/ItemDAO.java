@@ -37,11 +37,12 @@ public class ItemDAO {
 
             preparedStatement.setInt(1,item_id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            item.setItemId(resultSet.getInt("item_id"));
-            item.setTitle(resultSet.getString("title"));
-            item.setPrice(resultSet.getInt("price"));
-            item.setAvailability(resultSet.getInt("availability"));
+            while (resultSet.next()) {
+                item.setItemId(resultSet.getInt("item_id"));
+                item.setTitle(resultSet.getString("title"));
+                item.setPrice(resultSet.getInt("price"));
+                item.setAvailability(resultSet.getInt("availability"));
+            }
             resultSet.close();
             logger.info("Item "+item.getTitle()+" was received");
             return item;

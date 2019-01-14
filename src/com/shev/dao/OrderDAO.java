@@ -80,5 +80,4 @@ public class OrderDAO {
             logger.error("SQL error: "+e.getMessage());
         }
     }
-
 }

@@ -1,77 +1,48 @@
 package com.shev.dao;
 
 import com.shev.model.Cart;
+import com.shev.model.Client;
+import com.shev.model.Item;
+import com.shev.model.Order;
 import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CartDAO {
 
     private static Logger logger = Logger.getLogger(CartDAO.class.getName());
 
-    public static Cart insertCart(Cart cart){
-       /* String sql = "INSERT INTO cart (client_login) VALUES(?)";
-        try (Connection connection = ConnectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
-            preparedStatement.setString(1,cart);
-            preparedStatement.execute();
-            logger.info("Cart was inserted");
-            return cart;
-        } catch (SQLException e) {
-            logger.error("SQL error: " + e.getMessage());
-        }
-        logger.error("Client was not inserted");*/
-        return new Cart();
-    }
-
-    public static Cart retrieveCart(int order_id){
-        /*String sql = "SELECT order_id, client_login FROM cart WHERE order_id =?";
-        Cart cart = new Cart();
+    public static Cart retrieveClientOrders(Client client){
+        String sql = "SELECT * from public.select_orders_by_login(?)";
+        Cart cart = client.getCart();
+        ArrayList<Order> orders = (ArrayList<Order>) cart.getOrderList();
         try (Connection connection = ConnectionDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1,order_id);
+            preparedStatement.setString(1,client.getLogin());
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            cart.setOrderId(resultSet.getInt("position_id"));
-            cart.setLogin(resultSet.getString("item_id"));
+            while (resultSet.next()){
+                Item item = new Item();
+                Order order = new Order();
+                item.setItemId(resultSet.getInt("item_id"));
+                item.setTitle(resultSet.getString("title"));
+                item.setPrice(resultSet.getInt("price"));
+                order.setItem(item);
+                order.setItemCount(resultSet.getInt("item_count"));
+                order.setOrder_id(resultSet.getInt("order_id"));
+                order.setClient_login(resultSet.getString("client_login"));
+                order.setTime(resultSet.getDate("times").getTime());
+                orders.add(order);
+            }
             resultSet.close();
-            logger.info("Cart "+order_id+" was received");
+            logger.info("Cart of "+client.getLogin()+" was received");
             return cart;
         } catch (SQLException e) {
             logger.error("SQL error: "+e.getMessage());
         }
-        logger.info("Cart "+order_id+" was not received");*/
-        return new Cart();
-    }
-
-    public static Cart updateCart(Cart cart){
-        /*String sql = "UPDATE cart SET itclient_login=? WHERE order_id =?";
-        try (Connection connection = ConnectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1,cart.getLogin());
-            preparedStatement.setInt(2,order.getItemCount());
-            preparedStatement.execute();
-            logger.info("Order "+order.getPositionId()+" was updated");
-            return retrieveOrder(order.getPositionId());
-        } catch (SQLException e) {
-            logger.error("SQL error: "+e.getMessage());
-        }
-        logger.error("Order "+order.getPositionId()+" was not updated");*/
-        return new Cart();
-    }
-
-    public static void deleteOrder(int position_id){
-        /*String sql = "DELETE FROM orders WHERE position_id =?";
-        try (Connection connection = ConnectionDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql);) {
-            preparedStatement.setInt(1, position_id);
-            preparedStatement.execute();
-            logger.info("Order "+position_id+" was deleted");
-        } catch (SQLException e) {
-            logger.error("SQL error: "+e.getMessage());
-        }*/
+        logger.error("Cart of "+client.getLogin()+" was not received");
+        return cart;
     }
 }

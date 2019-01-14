@@ -65,6 +65,9 @@ public class Cart {
     }
 
     public int getTotalPrice() {
+        for (Order order:this.orderList) {
+            this.totalPrice += order.getItemCount()*order.getItem().getPrice();
+        }
         return totalPrice;
     }
 

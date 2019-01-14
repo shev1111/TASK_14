@@ -5,7 +5,7 @@ public class Item {
     private String title;
     private int price;
     private int availability;
-    private int itemsOrderCount;
+
 
     public Item() {
     }
@@ -48,14 +48,6 @@ public class Item {
 
     public void setAvailability(int availability) {
         this.availability = availability;
-    }
-
-    public int getItemsOrderCount() {
-        return itemsOrderCount;
-    }
-
-    public void setItemsOrderCount(int itemsOrderCount) {
-        this.itemsOrderCount = itemsOrderCount;
     }
 }
 
